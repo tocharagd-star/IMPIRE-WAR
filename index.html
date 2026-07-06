@@ -1,148 +1,412 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clan Wars</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         @font-face {
             font-family: 'Minecraft';
             src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft.woff2') format('woff2'),
                  url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            font-family: 'Minecraft', monospace;
+            image-rendering: pixelated;
+            background: #000;
+            overflow-x: hidden;
+        }
+
+        .bg-tiles {
+            position: fixed;
+            inset: 0;
+            background-image: url('images/BG.png');
+            background-size: 64px 64px;
+            background-repeat: repeat;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .main-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title-img {
+            max-width: 520px;
+            width: 80vw;
+            height: auto;
+            image-rendering: pixelated;
+        }
+
+        .title-subtitle {
+            color: #ffaa00;
+            font-size: 16px;
+            margin-top: 14px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #2a1a00;
+        }
+
+        .menu-wrapper {
+            position: relative;
+            width: 90vw;
+            max-width: 920px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            pointer-events: none;
+            image-rendering: pixelated;
+        }
+
+        .menu-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 34px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .clan-card {
+            width: 300px;
+            cursor: pointer;
+        }
+
+        .clan-card:hover {
+            transform: scale(1.03);
+        }
+
+        .clan-card-inner {
+            background: rgba(0, 0, 0, 0.78);
+            border: 4px solid #555;
+            border-top-color: #888;
+            border-left-color: #888;
+            border-right-color: #222;
+            border-bottom-color: #222;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .clan-chest:hover .clan-card-inner {
+            border-color: #d6a11f;
+            box-shadow: 0 0 20px rgba(214, 161, 31, 0.45);
+        }
+
+        .clan-volun:hover .clan-card-inner {
+            border-color: #4169e1;
+            box-shadow: 0 0 20px rgba(65, 105, 225, 0.45);
+        }
+
+        .clan-icon-wrapper {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(55, 55, 55, 0.75);
+            border: 3px solid #444;
+            border-top-color: #777;
+            border-left-color: #777;
+            border-right-color: #222;
+            border-bottom-color: #222;
+            padding: 8px;
+        }
+
+        .clan-icon {
+            max-width: 100%;
+            max-height: 100%;
+            image-rendering: pixelated;
+        }
+
+        .clan-title-wrapper {
+            width: 100%;
+            text-align: center;
+        }
+
+        .clan-title-img {
+            max-width: 210px;
+            width: 100%;
+            height: auto;
+            image-rendering: pixelated;
+        }
+
+        .clan-author {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .author-label {
+            color: #bdbdbd;
+            font-size: 10px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .author-name {
+            font-size: 14px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .chest-author { color: #ffd700; }
+        .volun-author { color: #6ea8ff; }
+
+        .clan-btn {
+            width: 100%;
+            padding: 9px 16px;
+            text-align: center;
+            color: #fff;
+            font-family: 'Minecraft', monospace;
+            font-size: 14px;
+            text-shadow: 2px 2px 0 #000;
+            border: 3px solid #333;
+            cursor: pointer;
+        }
+
+        .chest-btn {
+            background: linear-gradient(to bottom, #6b8e23, #556b2f, #3f5522);
+            border-top-color: #8fbc3e;
+            border-left-color: #8fbc3e;
+            border-right-color: #263818;
+            border-bottom-color: #263818;
+        }
+
+        .chest-btn:hover {
+            background: linear-gradient(to bottom, #8fbc3e, #6b8e23, #556b2f);
+        }
+
+        .volun-btn {
+            background: linear-gradient(to bottom, #4a6fa5, #3b5998, #2d4a7f);
+            border-top-color: #6a9fd8;
+            border-left-color: #6a9fd8;
+            border-right-color: #1a2e4a;
+            border-bottom-color: #1a2e4a;
+        }
+
+        .volun-btn:hover {
+            background: linear-gradient(to bottom, #6a9fd8, #4a6fa5, #3b5998);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-overlay.show { display: flex; }
+
+        .modal-box {
+            width: 90vw;
+            max-width: 420px;
+            padding: 30px 36px;
+            text-align: center;
+            background: #2c2c2c;
+            border: 4px solid #555;
+            border-top-color: #888;
+            border-left-color: #888;
+            border-right-color: #222;
+            border-bottom-color: #222;
+        }
+
+        .modal-title {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 16px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .modal-text {
+            color: #d0d0d0;
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .mc-button {
+            padding: 8px 24px;
+            color: #fff;
+            font-family: 'Minecraft', monospace;
+            font-size: 13px;
+            text-shadow: 2px 2px 0 #000;
+            background: linear-gradient(to bottom, #6b8e23, #556b2f, #4a5f28);
+            border: 3px solid #333;
+            border-top-color: #8fbc3e;
+            border-left-color: #8fbc3e;
+            border-right-color: #2d3a1a;
+            border-bottom-color: #2d3a1a;
+            cursor: pointer;
+        }
+
+        .mc-button:hover {
+            background: linear-gradient(to bottom, #8fbc3e, #6b8e23, #556b2f);
+        }
+
+        .mc-button-cancel {
+            background: linear-gradient(to bottom, #8b4444, #6b2f2f, #5f2828);
+            border-top-color: #bc3e3e;
+            border-left-color: #bc3e3e;
+            border-right-color: #3a1a1a;
+            border-bottom-color: #3a1a1a;
+        }
+
+        .mc-button-cancel:hover {
+            background: linear-gradient(to bottom, #bc3e3e, #8b4444, #6b2f2f);
+        }
+
+        @media (max-width: 768px) {
+            .menu-content {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .clan-card { width: 260px; }
+            .title-img { max-width: 320px; }
+            .title-subtitle { font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Фон из тайлов BG.png 16x16 -->
     <div class="bg-tiles"></div>
 
-    <!-- Затемнение фона -->
-    <div class="bg-overlay"></div>
+    <main class="container">
 
-    <!-- Основной контент -->
-    <div class="container">
+        <header class="main-title">
+            <img src="images/TITLE.png" alt="Clan Wars" class="title-img">
+            <div class="title-subtitle">Choose your clan</div>
+        </header>
 
-        <!-- Главный тайтл -->
-        <div class="main-title">
-            <img src="images/TITLE.png" alt="Title" class="title-img">
-            <div class="title-subtitle">⚔ Выбери свой клан ⚔</div>
-        </div>
-
-        <!-- Меню выбора кланов -->
-        <div class="menu-wrapper">
+        <section class="menu-wrapper">
             <img src="images/MENU_BG.png" alt="" class="menu-bg-img">
-
             <div class="menu-content">
 
-                <!-- Клан Сундуков (слева) -->
-                <div class="clan-card clan-chest" onclick="selectClan('chest')">
+                <div class="clan-card clan-chest" id="chest-card">
                     <div class="clan-card-inner">
                         <div class="clan-icon-wrapper">
                             <img src="images/CHEST_ICON.png" alt="Chest Clan" class="clan-icon">
                         </div>
                         <div class="clan-title-wrapper">
-                            <img src="images/CHEST_TITLE.png" alt="Chest Title" class="clan-title-img">
+                            <img src="images/CHEST_TITLE.png" alt="Chest Clan" class="clan-title-img">
                         </div>
                         <div class="clan-author">
-                            <span class="author-label">Автор клана:</span>
+                            <span class="author-label">Clan founder</span>
                             <span class="author-name chest-author">SeAk</span>
                         </div>
-                        <div class="clan-btn chest-btn">
-                            <span>Вступить</span>
-                        </div>
-                    </div>
-                    <!-- Частицы -->
-                    <div class="particles chest-particles">
-                        <span></span><span></span><span></span>
-                        <span></span><span></span><span></span>
-                        <span></span><span></span>
+                        <div class="clan-btn chest-btn">Join</div>
                     </div>
                 </div>
 
-                <!-- VS по центру -->
-                <div class="vs-section">
-                    <div class="vs-diamond"></div>
-                    <div class="vs-text">VS</div>
-                    <div class="vs-diamond"></div>
-                    <div class="vs-swords">⚔</div>
-                </div>
-
-                <!-- Клан Волунов (справа) -->
-                <div class="clan-card clan-bolun" onclick="selectClan('bolun')">
+                <div class="clan-card clan-volun" id="volun-card">
                     <div class="clan-card-inner">
                         <div class="clan-icon-wrapper">
-                            <img src="images/B_ICON.png" alt="Bolun Clan" class="clan-icon">
+                            <img src="images/B_ICON.png" alt="Volun Clan" class="clan-icon">
                         </div>
                         <div class="clan-title-wrapper">
-                            <img src="images/B_TITLE.png" alt="Bolun Title" class="clan-title-img">
+                            <img src="images/B_TITLE.png" alt="Volun Clan" class="clan-title-img">
                         </div>
                         <div class="clan-author">
-                            <span class="author-label">Автор клана:</span>
-                            <span class="author-name bolun-author">TOCHARA</span>
+                            <span class="author-label">Clan founder</span>
+                            <span class="author-name volun-author">TOCHARA</span>
                         </div>
-                        <div class="clan-btn bolun-btn">
-                            <span>Вступить</span>
-                        </div>
-                    </div>
-                    <!-- Частицы -->
-                    <div class="particles bolun-particles">
-                        <span></span><span></span><span></span>
-                        <span></span><span></span><span></span>
-                        <span></span><span></span>
+                        <div class="clan-btn volun-btn">Join</div>
                     </div>
                 </div>
 
             </div>
-        </div>
+        </section>
 
-        <!-- Нижняя панель -->
-        <div class="bottom-bar">
-            <div class="hotbar">
-                <div class="hotbar-slot active">
-                    <div class="slot-number">1</div>
-                    <div class="slot-icon">🏠</div>
-                </div>
-                <div class="hotbar-slot">
-                    <div class="slot-number">2</div>
-                    <div class="slot-icon">⚔</div>
-                </div>
-                <div class="hotbar-slot">
-                    <div class="slot-number">3</div>
-                    <div class="slot-icon">📊</div>
-                </div>
-                <div class="hotbar-slot">
-                    <div class="slot-number">4</div>
-                    <div class="slot-icon">🏆</div>
-                </div>
-                <div class="hotbar-slot">
-                    <div class="slot-number">5</div>
-                    <div class="slot-icon">⚙</div>
-                </div>
-            </div>
-        </div>
+    </main>
 
-    </div>
-
-    <!-- Модальное окно -->
     <div class="modal-overlay" id="modal">
         <div class="modal-box">
-            <div class="modal-title" id="modal-title">Клан выбран!</div>
-            <div class="modal-text" id="modal-text"></div>
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="modal-text" id="modalText"></div>
             <div class="modal-buttons">
-                <div class="mc-button" onclick="closeModal()">
-                    <span>OK</span>
-                </div>
-                <div class="mc-button mc-button-cancel" onclick="closeModal()">
-                    <span>Отмена</span>
-                </div>
+                <div class="mc-button" id="okBtn">OK</div>
+                <div class="mc-button mc-button-cancel" id="cancelBtn">Cancel</div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        var modal = document.getElementById('modal');
+        var modalTitle = document.getElementById('modalTitle');
+        var modalText = document.getElementById('modalText');
+        var chestCard = document.getElementById('chest-card');
+        var volunCard = document.getElementById('volun-card');
+        var okBtn = document.getElementById('okBtn');
+        var cancelBtn = document.getElementById('cancelBtn');
+
+        chestCard.addEventListener('click', function () {
+            modalTitle.textContent = 'Chest Clan';
+            modalTitle.style.color = '#FFD700';
+            modalText.innerHTML = 'You selected the Chest Clan.<br><br>Founder: SeAk';
+            modal.classList.add('show');
+        });
+
+        volunCard.addEventListener('click', function () {
+            modalTitle.textContent = 'Volun Clan';
+            modalTitle.style.color = '#6EA8FF';
+            modalText.innerHTML = 'You selected the Volun Clan.<br><br>Founder: TOCHARA';
+            modal.classList.add('show');
+        });
+
+        okBtn.addEventListener('click', function () {
+            modal.classList.remove('show');
+        });
+
+        cancelBtn.addEventListener('click', function () {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    </script>
+
 </body>
 </html>

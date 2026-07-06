@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clan Wars</title>
-
     <style>
         @font-face {
             font-family: 'Minecraft';
@@ -21,10 +20,10 @@
         html, body {
             width: 100%;
             min-height: 100%;
-            overflow-x: hidden;
             font-family: 'Minecraft', monospace;
             image-rendering: pixelated;
             background: #000;
+            overflow-x: hidden;
         }
 
         .bg-tiles {
@@ -34,12 +33,6 @@
             background-size: 64px 64px;
             background-repeat: repeat;
             z-index: 0;
-            animation: bgScroll 60s steps(180) infinite;
-        }
-
-        @keyframes bgScroll {
-            from { background-position: 0 0; }
-            to { background-position: 640px 640px; }
         }
 
         .container {
@@ -49,19 +42,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 24px;
         }
 
         .main-title {
             text-align: center;
-            margin-top: 20px;
             margin-bottom: 35px;
-            animation: titleFloat 3s steps(9) infinite;
-        }
-
-        @keyframes titleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
         }
 
         .title-img {
@@ -69,7 +56,6 @@
             width: 80vw;
             height: auto;
             image-rendering: pixelated;
-            filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.8));
         }
 
         .title-subtitle {
@@ -78,19 +64,12 @@
             margin-top: 14px;
             letter-spacing: 2px;
             text-shadow: 2px 2px 0 #2a1a00;
-            animation: subtitleBlink 2s steps(6) infinite;
-        }
-
-        @keyframes subtitleBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.65; }
         }
 
         .menu-wrapper {
             position: relative;
             width: 90vw;
             max-width: 920px;
-            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -114,20 +93,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 24px;
+            gap: 40px;
         }
 
         .clan-card {
             width: 300px;
             cursor: pointer;
-            transition: transform 0.3s steps(1);
         }
 
-        .clan-card:hover { transform: scale(1.03); }
-        .clan-card:active { transform: scale(0.97); }
+        .clan-card:hover {
+            transform: scale(1.03);
+        }
 
         .clan-card-inner {
-            background: rgba(0,0,0,0.78);
+            background: rgba(0, 0, 0, 0.78);
             border: 4px solid #555;
             border-top-color: #888;
             border-left-color: #888;
@@ -142,12 +121,12 @@
 
         .clan-chest:hover .clan-card-inner {
             border-color: #d6a11f;
-            box-shadow: 0 0 20px rgba(214,161,31,0.45);
+            box-shadow: 0 0 20px rgba(214, 161, 31, 0.45);
         }
 
         .clan-volun:hover .clan-card-inner {
             border-color: #4169e1;
-            box-shadow: 0 0 20px rgba(65,105,225,0.45);
+            box-shadow: 0 0 20px rgba(65, 105, 225, 0.45);
         }
 
         .clan-icon-wrapper {
@@ -156,7 +135,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(55,55,55,0.75);
+            background: rgba(55, 55, 55, 0.75);
             border: 3px solid #444;
             border-top-color: #777;
             border-left-color: #777;
@@ -169,17 +148,6 @@
             max-width: 100%;
             max-height: 100%;
             image-rendering: pixelated;
-            filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.7));
-        }
-
-        .clan-card:hover .clan-icon {
-            animation: iconMove 0.6s steps(2) forwards;
-        }
-
-        @keyframes iconMove {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(-8deg) scale(1.12); }
-            100% { transform: rotate(-5deg) scale(1.08); }
         }
 
         .clan-title-wrapper {
@@ -192,7 +160,6 @@
             width: 100%;
             height: auto;
             image-rendering: pixelated;
-            filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.75));
         }
 
         .clan-author {
@@ -226,7 +193,6 @@
             text-shadow: 2px 2px 0 #000;
             border: 3px solid #333;
             cursor: pointer;
-            user-select: none;
         }
 
         .chest-btn {
@@ -253,27 +219,6 @@
             background: linear-gradient(to bottom, #6a9fd8, #4a6fa5, #3b5998);
         }
 
-        .clan-btn:active {
-            padding-top: 11px;
-            padding-bottom: 7px;
-        }
-
-        .vs-section {
-            min-width: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .vs-diamond {
-            width: 16px;
-            height: 16px;
-            background: #55ffff;
-            transform: rotate(45deg);
-            box-shadow: 0 0 10px rgba(85,255,255,0.7);
-        }
-
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -281,7 +226,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
         }
 
         .modal-overlay.show { display: flex; }
@@ -357,15 +302,8 @@
                 gap: 18px;
             }
             .clan-card { width: 260px; }
-            .vs-section { flex-direction: row; }
             .title-img { max-width: 320px; }
             .title-subtitle { font-size: 12px; }
-        }
-
-        @media (max-width: 400px) {
-            .clan-card { width: 225px; }
-            .clan-icon-wrapper { width: 95px; height: 95px; }
-            .clan-btn { font-size: 12px; }
         }
     </style>
 </head>
@@ -399,11 +337,6 @@
                         </div>
                         <div class="clan-btn chest-btn">Join</div>
                     </div>
-                </div>
-
-                <div class="vs-section">
-                    <div class="vs-diamond"></div>
-                    <div class="vs-diamond"></div>
                 </div>
 
                 <div class="clan-card clan-volun" onclick="selectClan('volun')">
@@ -447,11 +380,11 @@
             if (clan === 'chest') {
                 title.textContent = 'Chest Clan';
                 title.style.color = '#FFD700';
-                text.innerHTML = 'You selected the <span style="color:#FFD700">Chest Clan</span>.<br><br>Founder: <span style="color:#FFD700">SeAk</span><br><br>Wealth is our power.';
+                text.innerHTML = 'You selected the <span style="color:#FFD700">Chest Clan</span>.<br><br>Founder: <span style="color:#FFD700">SeAk</span>';
             } else {
                 title.textContent = 'Volun Clan';
                 title.style.color = '#6EA8FF';
-                text.innerHTML = 'You selected the <span style="color:#6EA8FF">Volun Clan</span>.<br><br>Founder: <span style="color:#6EA8FF">TOCHARA</span><br><br>Strength in unity.';
+                text.innerHTML = 'You selected the <span style="color:#6EA8FF">Volun Clan</span>.<br><br>Founder: <span style="color:#6EA8FF">TOCHARA</span>';
             }
 
             modal.classList.add('show');
@@ -463,10 +396,6 @@
 
         document.getElementById('modal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
         });
     </script>
 

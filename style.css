@@ -10,8 +10,6 @@
             font-family: 'Minecraft';
             src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft.woff2') format('woff2'),
                  url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
         }
 
         * {
@@ -29,10 +27,6 @@
             background: #000;
         }
 
-        body {
-            min-height: 100vh;
-        }
-
         .bg-tiles {
             position: fixed;
             inset: 0;
@@ -44,13 +38,8 @@
         }
 
         @keyframes bgScroll {
-            from {
-                background-position: 0 0;
-            }
-
-            to {
-                background-position: 640px 640px;
-            }
+            from { background-position: 0 0; }
+            to { background-position: 640px 640px; }
         }
 
         .container {
@@ -71,13 +60,8 @@
         }
 
         @keyframes titleFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         .title-img {
@@ -85,7 +69,7 @@
             width: 80vw;
             height: auto;
             image-rendering: pixelated;
-            filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.8));
         }
 
         .title-subtitle {
@@ -93,22 +77,13 @@
             font-size: 16px;
             margin-top: 14px;
             letter-spacing: 2px;
-            text-shadow:
-                2px 2px 0 #2a1a00,
-                -1px -1px 0 #2a1a00,
-                1px -1px 0 #2a1a00,
-                -1px 1px 0 #2a1a00;
+            text-shadow: 2px 2px 0 #2a1a00;
             animation: subtitleBlink 2s steps(6) infinite;
         }
 
         @keyframes subtitleBlink {
-            0%, 100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.65;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.65; }
         }
 
         .menu-wrapper {
@@ -127,7 +102,6 @@
             width: 100%;
             height: 100%;
             object-fit: fill;
-            opacity: 1;
             pointer-events: none;
             image-rendering: pixelated;
         }
@@ -144,22 +118,16 @@
         }
 
         .clan-card {
-            position: relative;
             width: 300px;
             cursor: pointer;
             transition: transform 0.3s steps(1);
         }
 
-        .clan-card:hover {
-            transform: scale(1.03);
-        }
-
-        .clan-card:active {
-            transform: scale(0.97);
-        }
+        .clan-card:hover { transform: scale(1.03); }
+        .clan-card:active { transform: scale(0.97); }
 
         .clan-card-inner {
-            background: rgba(0, 0, 0, 0.78);
+            background: rgba(0,0,0,0.78);
             border: 4px solid #555;
             border-top-color: #888;
             border-left-color: #888;
@@ -170,21 +138,16 @@
             flex-direction: column;
             align-items: center;
             gap: 16px;
-            overflow: hidden;
         }
 
         .clan-chest:hover .clan-card-inner {
             border-color: #d6a11f;
-            box-shadow:
-                0 0 20px rgba(214, 161, 31, 0.45),
-                inset 0 0 24px rgba(214, 161, 31, 0.12);
+            box-shadow: 0 0 20px rgba(214,161,31,0.45);
         }
 
         .clan-volun:hover .clan-card-inner {
             border-color: #4169e1;
-            box-shadow:
-                0 0 20px rgba(65, 105, 225, 0.45),
-                inset 0 0 24px rgba(65, 105, 225, 0.12);
+            box-shadow: 0 0 20px rgba(65,105,225,0.45);
         }
 
         .clan-icon-wrapper {
@@ -193,7 +156,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(55, 55, 55, 0.75);
+            background: rgba(55,55,55,0.75);
             border: 3px solid #444;
             border-top-color: #777;
             border-left-color: #777;
@@ -206,7 +169,7 @@
             max-width: 100%;
             max-height: 100%;
             image-rendering: pixelated;
-            filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.7));
+            filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.7));
         }
 
         .clan-card:hover .clan-icon {
@@ -214,17 +177,9 @@
         }
 
         @keyframes iconMove {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-
-            50% {
-                transform: rotate(-8deg) scale(1.12);
-            }
-
-            100% {
-                transform: rotate(-5deg) scale(1.08);
-            }
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(-8deg) scale(1.12); }
+            100% { transform: rotate(-5deg) scale(1.08); }
         }
 
         .clan-title-wrapper {
@@ -237,7 +192,7 @@
             width: 100%;
             height: auto;
             image-rendering: pixelated;
-            filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.75));
+            filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.75));
         }
 
         .clan-author {
@@ -258,27 +213,24 @@
             text-shadow: 2px 2px 0 #000;
         }
 
-        .chest-author {
-            color: #ffd700;
-        }
-
-        .volun-author {
-            color: #6ea8ff;
-        }
+        .chest-author { color: #ffd700; }
+        .volun-author { color: #6ea8ff; }
 
         .clan-btn {
             width: 100%;
             padding: 9px 16px;
             text-align: center;
             color: #fff;
+            font-family: 'Minecraft', monospace;
             font-size: 14px;
             text-shadow: 2px 2px 0 #000;
             border: 3px solid #333;
+            cursor: pointer;
             user-select: none;
         }
 
         .chest-btn {
-            background: linear-gradient(to bottom, #6b8e23 0%, #556b2f 50%, #3f5522 100%);
+            background: linear-gradient(to bottom, #6b8e23, #556b2f, #3f5522);
             border-top-color: #8fbc3e;
             border-left-color: #8fbc3e;
             border-right-color: #263818;
@@ -286,11 +238,11 @@
         }
 
         .chest-btn:hover {
-            background: linear-gradient(to bottom, #8fbc3e 0%, #6b8e23 50%, #556b2f 100%);
+            background: linear-gradient(to bottom, #8fbc3e, #6b8e23, #556b2f);
         }
 
         .volun-btn {
-            background: linear-gradient(to bottom, #4a6fa5 0%, #3b5998 50%, #2d4a7f 100%);
+            background: linear-gradient(to bottom, #4a6fa5, #3b5998, #2d4a7f);
             border-top-color: #6a9fd8;
             border-left-color: #6a9fd8;
             border-right-color: #1a2e4a;
@@ -298,42 +250,20 @@
         }
 
         .volun-btn:hover {
-            background: linear-gradient(to bottom, #6a9fd8 0%, #4a6fa5 50%, #3b5998 100%);
+            background: linear-gradient(to bottom, #6a9fd8, #4a6fa5, #3b5998);
         }
 
         .clan-btn:active {
             padding-top: 11px;
             padding-bottom: 7px;
-            border-top-color: #222;
-            border-left-color: #222;
         }
 
         .vs-section {
-            min-width: 80px;
+            min-width: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-        }
-
-        .vs-text {
-            font-size: 38px;
-            color: #ff4444;
-            text-shadow:
-                3px 3px 0 #550000,
-                -1px -1px 0 #550000,
-                0 0 20px rgba(255, 68, 68, 0.6);
-            animation: vsPulse 1.5s steps(4) infinite;
-        }
-
-        @keyframes vsPulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.15);
-            }
         }
 
         .vs-diamond {
@@ -341,7 +271,7 @@
             height: 16px;
             background: #55ffff;
             transform: rotate(45deg);
-            box-shadow: 0 0 10px rgba(85, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(85,255,255,0.7);
         }
 
         .modal-overlay {
@@ -351,12 +281,10 @@
             display: none;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0,0,0,0.7);
         }
 
-        .modal-overlay.show {
-            display: flex;
-        }
+        .modal-overlay.show { display: flex; }
 
         .modal-box {
             width: 90vw;
@@ -369,19 +297,6 @@
             border-left-color: #888;
             border-right-color: #222;
             border-bottom-color: #222;
-            animation: modalAppear 0.3s steps(1);
-        }
-
-        @keyframes modalAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
 
         .modal-title {
@@ -408,24 +323,24 @@
         .mc-button {
             padding: 8px 24px;
             color: #fff;
+            font-family: 'Minecraft', monospace;
             font-size: 13px;
             text-shadow: 2px 2px 0 #000;
-            background: linear-gradient(to bottom, #6b8e23 0%, #556b2f 50%, #4a5f28 100%);
+            background: linear-gradient(to bottom, #6b8e23, #556b2f, #4a5f28);
             border: 3px solid #333;
             border-top-color: #8fbc3e;
             border-left-color: #8fbc3e;
             border-right-color: #2d3a1a;
             border-bottom-color: #2d3a1a;
             cursor: pointer;
-            user-select: none;
         }
 
         .mc-button:hover {
-            background: linear-gradient(to bottom, #8fbc3e 0%, #6b8e23 50%, #556b2f 100%);
+            background: linear-gradient(to bottom, #8fbc3e, #6b8e23, #556b2f);
         }
 
         .mc-button-cancel {
-            background: linear-gradient(to bottom, #8b4444 0%, #6b2f2f 50%, #5f2828 100%);
+            background: linear-gradient(to bottom, #8b4444, #6b2f2f, #5f2828);
             border-top-color: #bc3e3e;
             border-left-color: #bc3e3e;
             border-right-color: #3a1a1a;
@@ -433,7 +348,7 @@
         }
 
         .mc-button-cancel:hover {
-            background: linear-gradient(to bottom, #bc3e3e 0%, #8b4444 50%, #6b2f2f 100%);
+            background: linear-gradient(to bottom, #bc3e3e, #8b4444, #6b2f2f);
         }
 
         @media (max-width: 768px) {
@@ -441,41 +356,16 @@
                 flex-direction: column;
                 gap: 18px;
             }
-
-            .clan-card {
-                width: 260px;
-            }
-
-            .vs-section {
-                flex-direction: row;
-            }
-
-            .vs-text {
-                font-size: 30px;
-            }
-
-            .title-img {
-                max-width: 320px;
-            }
-
-            .title-subtitle {
-                font-size: 12px;
-            }
+            .clan-card { width: 260px; }
+            .vs-section { flex-direction: row; }
+            .title-img { max-width: 320px; }
+            .title-subtitle { font-size: 12px; }
         }
 
         @media (max-width: 400px) {
-            .clan-card {
-                width: 225px;
-            }
-
-            .clan-icon-wrapper {
-                width: 95px;
-                height: 95px;
-            }
-
-            .clan-btn {
-                font-size: 12px;
-            }
+            .clan-card { width: 225px; }
+            .clan-icon-wrapper { width: 95px; height: 95px; }
+            .clan-btn { font-size: 12px; }
         }
     </style>
 </head>
@@ -498,48 +388,37 @@
                 <div class="clan-card clan-chest" onclick="selectClan('chest')">
                     <div class="clan-card-inner">
                         <div class="clan-icon-wrapper">
-                            <img src="images/CHEST_ICON.png" alt="Chest Clan icon" class="clan-icon">
+                            <img src="images/CHEST_ICON.png" alt="Chest Clan" class="clan-icon">
                         </div>
-
                         <div class="clan-title-wrapper">
                             <img src="images/CHEST_TITLE.png" alt="Chest Clan" class="clan-title-img">
                         </div>
-
                         <div class="clan-author">
                             <span class="author-label">Clan founder</span>
                             <span class="author-name chest-author">SeAk</span>
                         </div>
-
-                        <div class="clan-btn chest-btn">
-                            <span>Join</span>
-                        </div>
+                        <div class="clan-btn chest-btn">Join</div>
                     </div>
                 </div>
 
                 <div class="vs-section">
                     <div class="vs-diamond"></div>
-                    <div class="vs-text">VS</div>
                     <div class="vs-diamond"></div>
                 </div>
 
                 <div class="clan-card clan-volun" onclick="selectClan('volun')">
                     <div class="clan-card-inner">
                         <div class="clan-icon-wrapper">
-                            <img src="images/B_ICON.png" alt="Volun Clan icon" class="clan-icon">
+                            <img src="images/B_ICON.png" alt="Volun Clan" class="clan-icon">
                         </div>
-
                         <div class="clan-title-wrapper">
                             <img src="images/B_TITLE.png" alt="Volun Clan" class="clan-title-img">
                         </div>
-
                         <div class="clan-author">
                             <span class="author-label">Clan founder</span>
                             <span class="author-name volun-author">TOCHARA</span>
                         </div>
-
-                        <div class="clan-btn volun-btn">
-                            <span>Join</span>
-                        </div>
+                        <div class="clan-btn volun-btn">Join</div>
                     </div>
                 </div>
 
@@ -550,9 +429,8 @@
 
     <div class="modal-overlay" id="modal">
         <div class="modal-box">
-            <div class="modal-title" id="modal-title">Clan selected</div>
+            <div class="modal-title" id="modal-title"></div>
             <div class="modal-text" id="modal-text"></div>
-
             <div class="modal-buttons">
                 <div class="mc-button" onclick="closeModal()">OK</div>
                 <div class="mc-button mc-button-cancel" onclick="closeModal()">Cancel</div>
@@ -562,68 +440,34 @@
 
     <script>
         function selectClan(clan) {
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalText = document.getElementById('modal-text');
+            var modal = document.getElementById('modal');
+            var title = document.getElementById('modal-title');
+            var text = document.getElementById('modal-text');
 
             if (clan === 'chest') {
-                modalTitle.textContent = 'Chest Clan';
-                modalTitle.style.color = '#FFD700';
-                modalText.innerHTML = `
-                    You selected the <span style="color:#FFD700;">Chest Clan</span>.<br><br>
-                    Founder: <span style="color:#FFD700;">SeAk</span><br><br>
-                    Wealth is our power.
-                `;
+                title.textContent = 'Chest Clan';
+                title.style.color = '#FFD700';
+                text.innerHTML = 'You selected the <span style="color:#FFD700">Chest Clan</span>.<br><br>Founder: <span style="color:#FFD700">SeAk</span><br><br>Wealth is our power.';
             } else {
-                modalTitle.textContent = 'Volun Clan';
-                modalTitle.style.color = '#6EA8FF';
-                modalText.innerHTML = `
-                    You selected the <span style="color:#6EA8FF;">Volun Clan</span>.<br><br>
-                    Founder: <span style="color:#6EA8FF;">TOCHARA</span><br><br>
-                    Strength in unity.
-                `;
+                title.textContent = 'Volun Clan';
+                title.style.color = '#6EA8FF';
+                text.innerHTML = 'You selected the <span style="color:#6EA8FF">Volun Clan</span>.<br><br>Founder: <span style="color:#6EA8FF">TOCHARA</span><br><br>Strength in unity.';
             }
 
             modal.classList.add('show');
-            playClickSound();
         }
 
         function closeModal() {
             document.getElementById('modal').classList.remove('show');
         }
 
-        document.getElementById('modal').addEventListener('click', function(event) {
-            if (event.target === this) {
-                closeModal();
-            }
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
         });
 
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
         });
-
-        function playClickSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gain = audioContext.createGain();
-
-                oscillator.connect(gain);
-                gain.connect(audioContext.destination);
-
-                oscillator.type = 'square';
-                oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-                oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.05);
-
-                gain.gain.setValueAtTime(0.08, audioContext.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
-
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.15);
-            } catch (error) {}
-        }
     </script>
 
 </body>

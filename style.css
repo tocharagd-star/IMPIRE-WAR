@@ -1,0 +1,708 @@
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Minecraft', 'Press Start 2P', monospace;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+/* ===== TILED BACKGROUND ===== */
+.bg-tiles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/BG.png');
+    background-size: 64px 64px;
+    background-repeat: repeat;
+    z-index: 0;
+    animation: bgScroll 60s linear infinite;
+}
+
+@keyframes bgScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 640px 640px; }
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ===== MAIN TITLE ===== */
+.main-title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.title-img {
+    max-width: 500px;
+    width: 80vw;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+}
+
+.title-subtitle {
+    color: #FFAA00;
+    font-size: 16px;
+    margin-top: 12px;
+    text-shadow:
+        2px 2px 0 #3F2A00,
+        -1px -1px 0 #3F2A00,
+        1px -1px 0 #3F2A00,
+        -1px 1px 0 #3F2A00;
+    letter-spacing: 2px;
+    animation: subtitlePulse 2s ease-in-out infinite;
+}
+
+@keyframes subtitlePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* ===== MENU WRAPPER ===== */
+.menu-wrapper {
+    position: relative;
+    width: 90vw;
+    max-width: 900px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-bg-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.menu-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 30px 20px;
+}
+
+/* ===== CLAN CARDS ===== */
+.clan-card {
+    position: relative;
+    width: 300px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.clan-card:hover {
+    transform: scale(1.03);
+}
+
+.clan-card:active {
+    transform: scale(0.97);
+}
+
+.clan-card-inner {
+    background: rgba(0, 0, 0, 0.75);
+    border: 4px solid #555;
+    border-top-color: #888;
+    border-left-color: #888;
+    border-right-color: #333;
+    border-bottom-color: #333;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Minecraft-стиль угловые декорации */
+.clan-card-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        transparent 0%, #aaa 2%, #aaa 98%, transparent 100%);
+}
+
+/* Свечение при наведении */
+.clan-chest:hover .clan-card-inner {
+    border-color: #DAA520;
+    box-shadow: 0 0 20px rgba(218, 165, 32, 0.4),
+                inset 0 0 30px rgba(218, 165, 32, 0.1);
+}
+
+.clan-bolun:hover .clan-card-inner {
+    border-color: #4169E1;
+    box-shadow: 0 0 20px rgba(65, 105, 225, 0.4),
+                inset 0 0 30px rgba(65, 105, 225, 0.1);
+}
+
+/* ===== CLAN ICON ===== */
+.clan-icon-wrapper {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(50, 50, 50, 0.6);
+    border: 3px solid #444;
+    border-top-color: #666;
+    border-left-color: #666;
+    border-right-color: #222;
+    border-bottom-color: #222;
+    padding: 8px;
+}
+
+.clan-icon {
+    max-width: 100%;
+    max-height: 100%;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+    transition: transform 0.3s;
+}
+
+.clan-card:hover .clan-icon {
+    transform: rotate(-5deg) scale(1.1);
+    animation: iconBounce 0.6s ease-in-out;
+}
+
+@keyframes iconBounce {
+    0% { transform: rotate(0) scale(1); }
+    25% { transform: rotate(-8deg) scale(1.15); }
+    50% { transform: rotate(3deg) scale(1.05); }
+    75% { transform: rotate(-3deg) scale(1.1); }
+    100% { transform: rotate(-5deg) scale(1.1); }
+}
+
+/* ===== CLAN TITLE ===== */
+.clan-title-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.clan-title-img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.8));
+}
+
+/* ===== CLAN AUTHOR ===== */
+.clan-author {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.author-label {
+    color: #aaa;
+    font-size: 10px;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.author-name {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.chest-author {
+    color: #FFD700;
+}
+
+.bolun-author {
+    color: #6EA8FF;
+}
+
+/* ===== CLAN BUTTON ===== */
+.clan-btn {
+    width: 100%;
+    padding: 8px 16px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Minecraft', monospace;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    transition: all 0.1s;
+    position: relative;
+}
+
+.chest-btn {
+    background: linear-gradient(to bottom, #6B8E23 0%, #556B2F 50%, #4A5F28 100%);
+    border: 3px solid #333;
+    border-top-color: #8FBC3E;
+    border-left-color: #8FBC3E;
+    border-bottom-color: #2D3A1A;
+    border-right-color: #2D3A1A;
+}
+
+.chest-btn:hover {
+    background: linear-gradient(to bottom, #8FBC3E 0%, #6B8E23 50%, #556B2F 100%);
+    border-top-color: #A5D14E;
+    border-left-color: #A5D14E;
+}
+
+.bolun-btn {
+    background: linear-gradient(to bottom, #4A6FA5 0%, #3B5998 50%, #2D4A7F 100%);
+    border: 3px solid #333;
+    border-top-color: #6A9FD8;
+    border-left-color: #6A9FD8;
+    border-bottom-color: #1A2E4A;
+    border-right-color: #1A2E4A;
+}
+
+.bolun-btn:hover {
+    background: linear-gradient(to bottom, #6A9FD8 0%, #4A6FA5 50%, #3B5998 100%);
+    border-top-color: #8AC0FF;
+    border-left-color: #8AC0FF;
+}
+
+.clan-btn:active {
+    padding-top: 10px;
+    padding-bottom: 6px;
+    border-top-color: #333;
+    border-left-color: #333;
+}
+
+/* ===== VS SECTION ===== */
+.vs-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+}
+
+.vs-text {
+    font-size: 36px;
+    color: #FF4444;
+    text-shadow:
+        3px 3px 0 #550000,
+        -1px -1px 0 #550000,
+        0 0 20px rgba(255, 68, 68, 0.5);
+    font-weight: bold;
+    animation: vsPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes vsPulse {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow:
+            3px 3px 0 #550000,
+            0 0 20px rgba(255, 68, 68, 0.5);
+    }
+    50% {
+        transform: scale(1.15);
+        text-shadow:
+            3px 3px 0 #550000,
+            0 0 40px rgba(255, 68, 68, 0.8);
+    }
+}
+
+.vs-diamond {
+    width: 16px;
+    height: 16px;
+    background: #55FFFF;
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px rgba(85, 255, 255, 0.6);
+}
+
+.vs-swords {
+    font-size: 28px;
+    animation: swordsSwing 2s ease-in-out infinite;
+}
+
+@keyframes swordsSwing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    75% { transform: rotate(-15deg); }
+}
+
+/* ===== PARTICLES ===== */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    opacity: 0;
+    animation: particleFloat 3s infinite;
+}
+
+.chest-particles span {
+    background: #FFD700;
+    box-shadow: 0 0 6px #FFD700;
+}
+
+.bolun-particles span {
+    background: #6EA8FF;
+    box-shadow: 0 0 6px #6EA8FF;
+}
+
+.particles span:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particles span:nth-child(2) { left: 25%; animation-delay: 0.4s; }
+.particles span:nth-child(3) { left: 40%; animation-delay: 0.8s; }
+.particles span:nth-child(4) { left: 55%; animation-delay: 1.2s; }
+.particles span:nth-child(5) { left: 70%; animation-delay: 1.6s; }
+.particles span:nth-child(6) { left: 85%; animation-delay: 2.0s; }
+.particles span:nth-child(7) { left: 15%; animation-delay: 2.4s; }
+.particles span:nth-child(8) { left: 65%; animation-delay: 2.8s; }
+
+@keyframes particleFloat {
+    0% {
+        bottom: -4px;
+        opacity: 0;
+        transform: translateX(0);
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0.5;
+    }
+    100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+.clan-card:hover .particles span {
+    animation-duration: 2s;
+}
+
+/* ===== BOTTOM BAR (HOTBAR) ===== */
+.bottom-bar {
+    margin-top: auto;
+    padding: 20px 0 10px;
+}
+
+.hotbar {
+    display: flex;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px;
+    border: 3px solid #555;
+    border-top-color: #888;
+    border-left-color: #888;
+    border-right-color: #222;
+    border-bottom-color: #222;
+}
+
+.hotbar-slot {
+    width: 56px;
+    height: 56px;
+    background: rgba(80, 80, 80, 0.7);
+    border: 2px solid #1a1a1a;
+    border-top-color: #333;
+    border-left-color: #333;
+    border-right-color: #555;
+    border-bottom-color: #555;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.1s;
+}
+
+.hotbar-slot:hover {
+    background: rgba(120, 120, 120, 0.8);
+    border-color: #aaa;
+}
+
+.hotbar-slot.active {
+    border: 2px solid #fff;
+    background: rgba(100, 100, 100, 0.9);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.slot-number {
+    font-size: 8px;
+    color: #aaa;
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.slot-icon {
+    font-size: 24px;
+    filter: drop-shadow(1px 1px 0 #000);
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-box {
+    background: #2C2C2C;
+    border: 4px solid #555;
+    border-top-color: #888;
+    border-left-color: #888;
+    border-right-color: #333;
+    border-bottom-color: #333;
+    padding: 30px 40px;
+    text-align: center;
+    max-width: 400px;
+    width: 90vw;
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-title {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 16px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.modal-text {
+    color: #ccc;
+    font-size: 12px;
+    margin-bottom: 24px;
+    text-shadow: 1px 1px 0 #000;
+    line-height: 1.8;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.mc-button {
+    padding: 8px 24px;
+    background: linear-gradient(to bottom, #6B8E23 0%, #556B2F 50%, #4A5F28 100%);
+    border: 3px solid #333;
+    border-top-color: #8FBC3E;
+    border-left-color: #8FBC3E;
+    border-bottom-color: #2D3A1A;
+    border-right-color: #2D3A1A;
+    color: #fff;
+    font-family: 'Minecraft', monospace;
+    font-size: 13px;
+    text-shadow: 2px 2px 0 #000;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.mc-button:hover {
+    background: linear-gradient(to bottom, #8FBC3E 0%, #6B8E23 50%, #556B2F 100%);
+}
+
+.mc-button:active {
+    padding-top: 10px;
+    padding-bottom: 6px;
+}
+
+.mc-button-cancel {
+    background: linear-gradient(to bottom, #8B4444 0%, #6B2F2F 50%, #5F2828 100%);
+    border-top-color: #BC3E3E;
+    border-left-color: #BC3E3E;
+    border-bottom-color: #3A1A1A;
+    border-right-color: #3A1A1A;
+}
+
+.mc-button-cancel:hover {
+    background: linear-gradient(to bottom, #BC3E3E 0%, #8B4444 50%, #6B2F2F 100%);
+}
+
+/* ===== TOOLTIP (при наведении на карточку) ===== */
+.clan-card::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20, 0, 30, 0.95);
+    color: #fff;
+    font-size: 11px;
+    padding: 5px 10px;
+    border: 2px solid #5500AA;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    text-shadow: 1px 1px 0 #000;
+    z-index: 10;
+}
+
+.clan-chest::after {
+    border-color: #DAA520;
+}
+
+.clan-bolun::after {
+    border-color: #4169E1;
+}
+
+.clan-card:hover::after {
+    opacity: 1;
+}
+
+.clan-chest[data-tooltip]::after {
+    content: "🪙 Клан Сундуков";
+}
+
+.clan-bolun[data-tooltip]::after {
+    content: "🛡️ Клан Волунов";
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .menu-content {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .clan-card {
+        width: 260px;
+    }
+
+    .vs-section {
+        flex-direction: row;
+        min-width: auto;
+    }
+
+    .vs-text {
+        font-size: 28px;
+    }
+
+    .title-img {
+        max-width: 300px;
+    }
+
+    .title-subtitle {
+        font-size: 12px;
+    }
+
+    .hotbar-slot {
+        width: 44px;
+        height: 44px;
+    }
+
+    .slot-icon {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .clan-card {
+        width: 220px;
+    }
+
+    .clan-icon-wrapper {
+        width: 90px;
+        height: 90px;
+    }
+
+    .clan-btn {
+        font-size: 12px;
+    }
+}
+
+/* ===== SCROLLBAR (Minecraft style) ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border: 2px solid #333;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* ===== SELECTION ===== */
+::selection {
+    background: #5555FF;
+    color: #fff;
+}

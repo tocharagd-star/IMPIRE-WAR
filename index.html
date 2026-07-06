@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clan Wars</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Фон из тайлов BG.png 16x16 -->
+    <div class="bg-tiles"></div>
+
+    <!-- Затемнение фона -->
+    <div class="bg-overlay"></div>
+
+    <!-- Основной контент -->
+    <div class="container">
+
+        <!-- Главный тайтл -->
+        <div class="main-title">
+            <img src="images/TITLE.png" alt="Title" class="title-img">
+            <div class="title-subtitle">⚔ Выбери свой клан ⚔</div>
+        </div>
+
+        <!-- Меню выбора кланов -->
+        <div class="menu-wrapper">
+            <img src="images/MENU_BG.png" alt="" class="menu-bg-img">
+
+            <div class="menu-content">
+
+                <!-- Клан Сундуков (слева) -->
+                <div class="clan-card clan-chest" onclick="selectClan('chest')">
+                    <div class="clan-card-inner">
+                        <div class="clan-icon-wrapper">
+                            <img src="images/CHEST_ICON.png" alt="Chest Clan" class="clan-icon">
+                        </div>
+                        <div class="clan-title-wrapper">
+                            <img src="images/CHEST_TITLE.png" alt="Chest Title" class="clan-title-img">
+                        </div>
+                        <div class="clan-author">
+                            <span class="author-label">Автор клана:</span>
+                            <span class="author-name chest-author">SeAk</span>
+                        </div>
+                        <div class="clan-btn chest-btn">
+                            <span>Вступить</span>
+                        </div>
+                    </div>
+                    <!-- Частицы -->
+                    <div class="particles chest-particles">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                        <span></span><span></span>
+                    </div>
+                </div>
+
+                <!-- VS по центру -->
+                <div class="vs-section">
+                    <div class="vs-diamond"></div>
+                    <div class="vs-text">VS</div>
+                    <div class="vs-diamond"></div>
+                    <div class="vs-swords">⚔</div>
+                </div>
+
+                <!-- Клан Волунов (справа) -->
+                <div class="clan-card clan-bolun" onclick="selectClan('bolun')">
+                    <div class="clan-card-inner">
+                        <div class="clan-icon-wrapper">
+                            <img src="images/B_ICON.png" alt="Bolun Clan" class="clan-icon">
+                        </div>
+                        <div class="clan-title-wrapper">
+                            <img src="images/B_TITLE.png" alt="Bolun Title" class="clan-title-img">
+                        </div>
+                        <div class="clan-author">
+                            <span class="author-label">Автор клана:</span>
+                            <span class="author-name bolun-author">TOCHARA</span>
+                        </div>
+                        <div class="clan-btn bolun-btn">
+                            <span>Вступить</span>
+                        </div>
+                    </div>
+                    <!-- Частицы -->
+                    <div class="particles bolun-particles">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                        <span></span><span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Нижняя панель -->
+        <div class="bottom-bar">
+            <div class="hotbar">
+                <div class="hotbar-slot active">
+                    <div class="slot-number">1</div>
+                    <div class="slot-icon">🏠</div>
+                </div>
+                <div class="hotbar-slot">
+                    <div class="slot-number">2</div>
+                    <div class="slot-icon">⚔</div>
+                </div>
+                <div class="hotbar-slot">
+                    <div class="slot-number">3</div>
+                    <div class="slot-icon">📊</div>
+                </div>
+                <div class="hotbar-slot">
+                    <div class="slot-number">4</div>
+                    <div class="slot-icon">🏆</div>
+                </div>
+                <div class="hotbar-slot">
+                    <div class="slot-number">5</div>
+                    <div class="slot-icon">⚙</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <div class="modal-title" id="modal-title">Клан выбран!</div>
+            <div class="modal-text" id="modal-text"></div>
+            <div class="modal-buttons">
+                <div class="mc-button" onclick="closeModal()">
+                    <span>OK</span>
+                </div>
+                <div class="mc-button mc-button-cancel" onclick="closeModal()">
+                    <span>Отмена</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
